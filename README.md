@@ -74,6 +74,16 @@ Use "aws-keymaster [command] --help" for more information about a command.
 
 ### Import a public key into all regions
 
+```shell
+Imports a public key with the specified name and public key to all AWS regions
+
+Usage:
+  aws-keymaster import [name] [public key file] [flags]
+
+Global Flags:
+      --dry-run[=false]: Checks whether you have the required permissions, without attempting the request
+```
+
 To import a public key to all regions, you use the `import` command. It requires two arguments: the name of the key pair and the path to the public key on your file system.
 
 ```shell
@@ -95,6 +105,19 @@ eu-west-1:       Imported keypair 'mypubkey' - 57:bf:37:68:69:18:29:aa:4d:da:f7:
 ```
 
 ### Delete a named keypair from all regions
+
+```shell
+Deletes a keypair with the specified name from all AWS regions
+
+Usage:
+  aws-keymaster delete [name] [flags]
+
+Flags:
+  -f, --force[=false]: Delete keypairs without prompting
+
+Global Flags:
+      --dry-run[=false]: Checks whether you have the required permissions, without attempting the request
+```
 
 To delete a keypair called `keypairname` from all regions, you can use the `delete` subcommand:
 

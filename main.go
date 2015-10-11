@@ -21,7 +21,7 @@ func main() {
 	importCmd := &cobra.Command{
 		Use:   "import [name] [public key file]",
 		Short: "Imports a public key into all AWS regions",
-		Long:  "A simple utility that makes it easy to import a public key into all AWS regions with a single command",
+		Long:  "Imports a public key with the specified name and public key to all AWS regions",
 		Run: func(cmd *cobra.Command, args []string) {
 			var name string
 			var pubKey string
