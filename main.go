@@ -60,6 +60,7 @@ func main() {
 		},
 	}
 
+	var forceDelete bool
 	deleteCmd := &cobra.Command{
 		Use:   "delete [name]",
 		Short: "Deletes a keypair from all AWS regions",
@@ -79,12 +80,15 @@ func main() {
 				return
 			}
 
-			err := deleteKeyPair(name, dryRun)
-			if err != nil {
-				fmt.Printf("Could not delete key pair: %v\n", err)
+			if forceDelete || confirm(fmt.Sprintf("Are you sure you want to delete keypair '%s'?", name)) {
+				err := deleteKeyPair(name, dryRun)
+				if err != nil {
+					fmt.Printf("Could not delete key pair: %v\n", err)
+				}
 			}
 		},
 	}
+	deleteCmd.Flags().BoolVarP(&forceDelete, "force", "f", false, "Delete keypairs without prompting")
 
 	versionCmd := &cobra.Command{
 		Use:   "version",
@@ -201,6 +205,27 @@ func regions() []string {
 	}
 
 	return regions
+}
+
+func confirm(q string) bool {
+	fmt.Printf("%s (yes/no) [no]: ", q)
+
+	r := bufio.NewReader(os.Stdin)
+	val, err := r.ReadString('\n')
+	if err != nil {
+		fmt.Printf("Failed to confirm: %v\n", err)
+		return false
+	}
+
+	val = strings.ToLower(strings.TrimSpace(val))
+
+	for _, response := range []string{"y", "yes"} {
+		if val == response {
+			return true
+		}
+	}
+
+	return false
 }
 
 func prompt(name string, defaultVal string) string {
