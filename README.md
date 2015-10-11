@@ -157,3 +157,5 @@ docker run --rm -it -v ~/.ssh/:/ssh -e "AWS_ACCESS_KEY_ID=AKID1234567890" -e "AW
 ## License
 
 `aws-keymaster` is released under the Apache 2.0 license (see [LICENSE](LICENSE))
+
+![The Keymaster](https://media.giphy.com/media/DMDC9TiivFhm/giphy.gif)
