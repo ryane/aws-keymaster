@@ -13,8 +13,8 @@ import (
 	"strings"
 )
 
-const name = "aws-keymaster"
-const version = "0.1"
+const Name = "aws-keymaster"
+const Version = "0.1"
 
 func main() {
 	var dryRun bool
@@ -92,14 +92,14 @@ func main() {
 
 	versionCmd := &cobra.Command{
 		Use:   "version",
-		Short: fmt.Sprintf("Display the version of %s", name),
-		Long:  fmt.Sprintf("Display the version of %s", name),
+		Short: fmt.Sprintf("Display the version of %s", Name),
+		Long:  fmt.Sprintf("Display the version of %s", Name),
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(version)
+			fmt.Println(Version)
 		},
 	}
 
-	rootCmd := &cobra.Command{Use: name}
+	rootCmd := &cobra.Command{Use: Name}
 	rootCmd.PersistentFlags().BoolVarP(&dryRun, "dry-run", "", false, "Checks whether you have the required permissions, without attempting the request")
 	rootCmd.AddCommand(importCmd)
 	rootCmd.AddCommand(deleteCmd)
